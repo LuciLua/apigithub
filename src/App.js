@@ -43,19 +43,24 @@ class App extends Component {
 
   render(){
 
-    const { githubData } = this.state;
+      const { githubData } = this.state;
+      
+      function teste() {
+          axios.get(
+              api.baseURL+"/users/LuciLua/followers?page=2").then((res) => {
+                  console.log("Infos", res)
+                  for (let i = 0; i < res.data.length; i++){
+                    document.querySelector('.followersr').innerHTML = res.data[i].login
+                    }
+                  }
 
-    function teste() {
-        axios.get(
-        api.baseURL+"/users/LuciLua/followers?page=2").then((res) => {
-            console.log("Infos", res)
-        })    
-    }
+                )    
+            }
 
     return(
       <div className="App">
         <header>
-            <h1>GitHub Followers</h1>
+            <h1 id="oo">GitHub Followers{}</h1>
         </header>
         <main>
             <div className="container">
@@ -66,10 +71,10 @@ class App extends Component {
                 </div>
             </div>
             <div className="container result">
-                <div className="login">
+                <div className="login" id="login">
                     {githubData.map((name) => (
-                        <div className="followers" key={name.id}>
-                            <a href={name.html_url}>
+                        <div className="followers" id="followers" key={name.id}>
+                            <a href={name.html_url} className="followersr">
                                 <Apitem login={name.login}/>
                                 <img src={name.avatar_url} alt="Avatar"/>
                             </a>
