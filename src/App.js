@@ -1,16 +1,16 @@
 import './App.css';
 import axios from 'axios';
 import { Component } from 'react';
-
-
+import Apitem from './components/Apitem';
 
 const api = {
-  baseURL: "http://api.github.com",
-  client_id: "217a90be2d13073d5d31",
-  client_secret: "2c16427d9110cc99856cf6d79ae459c1d5bf1295"
-}
+    baseURL: "http://api.github.com",
+    client_id: "217a90be2d13073d5d31",
+    client_secret: "2c16427d9110cc99856cf6d79ae459c1d5bf1295"
+  }
 
 class App extends Component {
+
 
   constructor(){
     super();
@@ -27,15 +27,14 @@ class App extends Component {
 
     axios
         .get(
-        api.baseURL+
-        "/users/LuciLua/followers"+pageB
-        /*
+        api.baseURL
         +
-        api.client_id+
-        "&"+
-        api.client_secret
-        */
-        )
+        "/users/LuciLua/followers" + pageB
+        /*+
+        api.client_id+"&client_secret="
+        +
+        "2c16427d9110cc99856cf6d79ae459c1d5bf1295")
+        */)
         .then((res) => {
         console.log("Infos", res)
         this.setState({githubData: res.data})
@@ -44,18 +43,15 @@ class App extends Component {
 
   render(){
 
-    function teste() {
-        var page = document.getElementById('page')
-        var pageB = page.value
-        pageB = page
-        console.log(pageB.value)
-
-        axios.get(
-            api.baseURL+
-            "/users/LuciLua/followers"+pageB
-        )
-    }
     const { githubData } = this.state;
+
+    function teste() {
+        axios.get(
+        api.baseURL+"/users/LuciLua/followers?page=2").then((res) => {
+            console.log("Infos", res)
+        })    
+    }
+
     return(
       <div className="App">
         <header>
@@ -74,8 +70,8 @@ class App extends Component {
                     {githubData.map((name) => (
                         <div className="followers" key={name.id}>
                             <a href={name.html_url}>
-                                <p>{name.login}</p>
-                                <img src={name.avatar_url} alt="avatar"/>
+                                <Apitem login={name.login}/>
+                                <img src={name.avatar_url} alt="Avatar"/>
                             </a>
                         </div>
                     ))}
