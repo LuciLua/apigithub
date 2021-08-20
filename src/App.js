@@ -24,37 +24,41 @@ class App extends Component {
     // var page = "?page=2"
     var page = document.getElementById('page').value
     var pageB = page 
-
     axios
-        .get(
-        api.baseURL
-        +
-        "/users/LuciLua/followers" + pageB
-        /*+
-        api.client_id+"&client_secret="
-        +
-        "2c16427d9110cc99856cf6d79ae459c1d5bf1295")
-        */)
-        .then((res) => {
+    .get(
+      api.baseURL+"/users/LuciLua/followers?page=" + pageB)
+      .then((res) => {
         console.log("Infos", res)
         this.setState({githubData: res.data})
-        })    
-  }  
-
-  render(){
-
+      })    
+    } 
+    
+    render(){
+      
       const { githubData } = this.state;
       
       function teste() {
-          axios.get(
-              api.baseURL+"/users/LuciLua/followers?page=2").then((res) => {
-                  console.log("Infos", res)
-                  for (let i = 0; i < res.data.length; i++){
-                    document.querySelector('.followersr').innerHTML = res.data[i].login
-                    }
-                  }
+        
+        var page = document.getElementById('page').value
+        var pageB = page 
+        
+        axios
+        .get(api.baseURL+"/users/LuciLua/followers?page=".concat(pageB))
+        .then((res) => {
+          console.log("Infos", res)
+          console.log(res.data.length)
+          
+          for (let i = 0; i < res.data.length; i++){
+            var qt = ((res.data.length) - 1)
+            qt++
+            var login = '<div className="followers" id="followers" key={res.data[i].id}>'
+            var coisas = `<a href=${res.data[i].html_url} className="followersr"><Apitem login=${res.data[i].login}/><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
 
-                )    
+            document.querySelector('.login').innerHTML += login + res.data[i].login + coisas
+            document.getElementById('contador').innerHTML = qt
+        }
+
+        })       
             }
 
     return(
@@ -64,6 +68,9 @@ class App extends Component {
         </header>
         <main>
             <div className="container">
+              <div id="contador">
+                  30
+              </div>
                 <div className="form">
                     <input type="text" placeholder="page" id="page"/>
                     <input type="text" placeholder="seguidor"/>
@@ -78,7 +85,7 @@ class App extends Component {
                                 <Apitem login={name.login}/>
                                 <img src={name.avatar_url} alt="Avatar"/>
                             </a>
-                        </div>
+                      </div>
                     ))}
                 </div> 
             </div>
