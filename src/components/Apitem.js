@@ -2,7 +2,7 @@ import React from 'react';
 
 const Apitem = (props) => {
     return (   
-        <p>{props.login}</p>
+        <p class="nomes">{props.login}</p>
         )
 }
 

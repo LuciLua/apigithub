@@ -100,18 +100,8 @@
 
 }
 
+.followers, 
 .login #followers{
-  background-color: rgba(26, 26, 26, 0.452);
-  margin: 2px;
-  border-radius: 3px;
-
-  padding: 10px;
-
-  display: flex;
-  flex-direction: row;
-}
-
-.followers{
   width: fit-content;
   padding-right: 20px;
 

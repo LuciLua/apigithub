@@ -40,7 +40,8 @@ header h1{
 }
 
 main{
-  height: calc(100vh - 70px);
+  min-height: calc(100vh - 70px);
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
