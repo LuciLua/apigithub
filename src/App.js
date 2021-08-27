@@ -1,7 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import { Component } from 'react';
-import Apitem from './components/Apitem';
+// import Apitem from './components/Apitem';
 
 const api = {
     baseURL: "http://api.github.com",
@@ -51,7 +51,7 @@ class App extends Component {
           for (let i = 0; i < res.data.length; i++){
             var qt = ((res.data.length) - 1)
             qt++
-            var dados = `<div className="followers" id="followers" key={res.data[i].id}><a href=${res.data[i].html_url} className="followersr"><p class="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
+            var dados = `<div className="followers" id="followers" key={res.data[i].id}><a href=${res.data[i].html_url} className="followersr"><p className="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
 
             document.querySelector('.login').innerHTML += dados
             document.getElementById('contador').innerHTML = qt
@@ -62,6 +62,16 @@ class App extends Component {
 
             function segui(){
 
+            }
+
+            function clear(){
+              var fol = document.querySelectorAll('.followers')
+
+              for(let i = 0; i < fol.length; i++){
+                fol[i].style.display='none'
+                fol[i].parentNode.removeChild(fol[i])
+              }
+              console.log('ola')
             }
 
     return(
@@ -78,6 +88,7 @@ class App extends Component {
                     <input type="text" placeholder="page" id="page"/>
                     <input type="text" placeholder="seguidor" onInput={segui} />
                     <button type="submit" onClick={teste}>Look this</button>
+                    <button onClick={clear}>Clear</button>
                 </div>
             </div>
             <div className="container result">
@@ -85,7 +96,7 @@ class App extends Component {
                     {githubData.map((name) => (
                         <div className="followers" id="followers" key={name.id}>
                             <a href={name.html_url} className="followersr">
-                                <p class="nomes">{name.login}</p>
+                                <p className="nomes">{name.login}</p>
                                 <img src={name.avatar_url} alt="Avatar"/>
                             </a>
                       </div>
@@ -93,7 +104,7 @@ class App extends Component {
                 </div> 
             </div>
             <div className="container">
-              
+
             </div>
         </main>
         <footer>
