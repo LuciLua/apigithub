@@ -101,7 +101,9 @@
 }
 
 .followers, 
-.login #followers{
+.login #followers,
+.following,
+.login #following{
   width: fit-content;
   padding-right: 20px;
 

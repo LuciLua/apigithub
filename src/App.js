@@ -51,9 +51,28 @@ class App extends Component {
           for (let i = 0; i < res.data.length; i++){
             var qt = ((res.data.length) - 1)
             qt++
-            var dados = `<div className="followers" id="followers" key={res.data[i].id}><a href=${res.data[i].html_url} className="followersr"><p className="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
+            var dados = `<div className="followers" id="followers" key=${res.data[i].id}><a href=${res.data[i].html_url} className="followersr"><p className="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
 
             document.querySelector('.login').innerHTML += dados
+            document.getElementById('contador').innerHTML = qt
+        }
+
+        })      
+        
+        var pageCC = document.getElementById('pageC').value
+        var pageC = pageCC 
+        axios
+        .get(api.baseURL+"/users/LuciLua/following?page=".concat(pageC))
+        .then((res) => {
+          console.log("Infos", res)
+          console.log(res.data.length)
+          
+          for (let i = 0; i < res.data.length; i++){
+            var qt = ((res.data.length) - 1)
+            qt++
+            var dados = `<div className="following" id="following" key=${res.data[i].id}><a href=${res.data[i].html_url} className="following"><p className="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
+
+            document.querySelector('.loginDois').innerHTML += dados
             document.getElementById('contador').innerHTML = qt
         }
 
@@ -74,6 +93,10 @@ class App extends Component {
               console.log('ola')
             }
 
+            function check(){
+              
+            }
+
     return(
       <div className="App">
         <header>
@@ -86,13 +109,15 @@ class App extends Component {
               </div>
                 <div className="form">
                     <input type="text" placeholder="page" id="page"/>
+                    <input type="text" placeholder="pageC" id="pageC"/>
                     <input type="text" placeholder="seguidor" onInput={segui} />
                     <button type="submit" onClick={teste}>Look this</button>
                     <button onClick={clear}>Clear</button>
+                    <button onClick={check}>Check</button>
                 </div>
             </div>
             <div className="container result">
-                <div className="login" id="login">
+            <div className="login" id="login">
                     {githubData.map((name) => (
                         <div className="followers" id="followers" key={name.id}>
                             <a href={name.html_url} className="followersr">
@@ -103,8 +128,17 @@ class App extends Component {
                     ))}
                 </div> 
             </div>
-            <div className="container">
-
+            <div className="container result resultDois">
+            <div className="login loginDois" id="login">
+                    {githubData.map((name) => (
+                        <div className="following" id="following" key={name.id}>
+                            <a href={name.html_url} className="followersr">
+                                <p className="nomes">{name.login}</p>
+                                <img src={name.avatar_url} alt="Avatar"/>
+                            </a>
+                      </div>
+                    ))}
+                </div>
             </div>
         </main>
         <footer>
