@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidMount(){ // will é chamado so uma vez: antes do site ser renderizado, ele é chamado no server side.... já o did: ja foi montado. é chamado depois que o site ja carregou, quando o cliente ja recebeu algumas informações do site.
     }
-     
+    
     render(){
       
       const { githubData } = this.state;
@@ -32,7 +32,7 @@ class App extends Component {
         var pageB = document.getElementById('page').value
         
         axios
-        .get(api.baseURL+"/users/LuciLua/followers?page=".concat(pageB))
+        .get(api.baseURL+"/users/LuciLua/followers?page=".concat(pageB)+`/${api.client_id}&${api.client_secret}`)
         .then((res) => {
          
           for (let i = 0; i < res.data.length; i++){
