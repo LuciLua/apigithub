@@ -22,8 +22,7 @@ class App extends Component {
   componentDidMount(){ // will é chamado so uma vez: antes do site ser renderizado, ele é chamado no server side.... já o did: ja foi montado. é chamado depois que o site ja carregou, quando o cliente ja recebeu algumas informações do site.
 
     // var page = "?page=2"
-    var page = document.getElementById('page').value
-    var pageB = page 
+    var pageB = document.getElementById('page').value
     axios
     .get(
       api.baseURL+"/users/LuciLua/followers?page=" + pageB)
@@ -31,70 +30,104 @@ class App extends Component {
         console.log("Infos", res)
         this.setState({githubData: res.data})
       })    
-    } 
+    }
+     
     
     render(){
       
       const { githubData } = this.state;
+
+      var followersTotal = []
+      var followingTotal = []
       
       function teste() {
+
         
-        var page = document.getElementById('page').value
-        var pageB = page 
+        var pageB = document.getElementById('page').value
         
         axios
         .get(api.baseURL+"/users/LuciLua/followers?page=".concat(pageB))
         .then((res) => {
-          console.log("Infos", res)
-          console.log(res.data.length)
-          
+         
           for (let i = 0; i < res.data.length; i++){
-            var qt = ((res.data.length) - 1)
-            qt++
             var dados = `<div className="followers" id="followers" key=${res.data[i].id}><a href=${res.data[i].html_url} className="followersr"><p className="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
 
             document.querySelector('.login').innerHTML += dados
-            document.getElementById('contador').innerHTML = qt
-        }
 
-        })      
+            followersTotal.push(res.data[i].login)
+
+        }
+        })    
+
         
-        var pageCC = document.getElementById('pageC').value
-        var pageC = pageCC 
+        var pageC = document.getElementById('pageC').value 
+
         axios
         .get(api.baseURL+"/users/LuciLua/following?page=".concat(pageC))
         .then((res) => {
-          console.log("Infos", res)
-          console.log(res.data.length)
           
           for (let i = 0; i < res.data.length; i++){
-            var qt = ((res.data.length) - 1)
-            qt++
             var dados = `<div className="following" id="following" key=${res.data[i].id}><a href=${res.data[i].html_url} className="following"><p className="nomes">${res.data[i].login}</p><img src=${res.data[i].avatar_url} alt="Avatar"/></a></div>`
 
             document.querySelector('.loginDois').innerHTML += dados
-            document.getElementById('contador').innerHTML = qt
-        }
 
-        })       
+            followingTotal.push(res.data[i].login)
+            var fwing = document.getElementById('fwing')
+            fwing.innerHTML = res.data.length
+          }
+
+            })       
+            
+          }
+
+          function clear(){
+            var fol = document.querySelectorAll('.followers')
+            var fow = document.querySelectorAll('.following')
+          
+            for(let i = 0; i < fol.length; i++){
+              fol[i].style.display='none'
+              // fol[i].parentNode.removeChild(fol[i])
             }
+            for(let i = 0; i < fow.length; i++){
+              fow[i].style.display='none'
+              // fow[i].parentNode.removeChild(fow[i])
+            }
+            
+          }
 
             function segui(){
 
             }
 
-            function clear(){
-              var fol = document.querySelectorAll('.followers')
+            function sort(){
 
-              for(let i = 0; i < fol.length; i++){
-                fol[i].style.display='none'
-                fol[i].parentNode.removeChild(fol[i])
-              }
-              console.log('ola')
-            }
+              
+              console.log('seguidores total:', followersTotal.length)
+              console.log('seguindo total:', followingTotal.length)
+              
+              var flow = document.getElementById('flow')
+              flow.innerHTML = followersTotal.length
+
+              var fwing = document.getElementById('fwing')
+              fwing.innerHTML = followingTotal.length
+
+          }
 
             function check(){
-              
+              for (let i = 0; i < followingTotal.length; i++){
+
+                // console.log('following', [i+1], followingTotal[i])               
+
+                for (let o = 0; o < followersTotal.length; o++){
+  
+                  console.log('followers', [o+1], followersTotal[o])        
+                  if (followingTotal[i] === followersTotal[o]){
+                    console.log('ok')
+                  }       else {
+                  }
+  
+                }
+              }
             }
 
     return(
@@ -114,10 +147,12 @@ class App extends Component {
                     <button type="submit" onClick={teste}>Look this</button>
                     <button onClick={clear}>Clear</button>
                     <button onClick={check}>Check</button>
+                    <button onClick={sort}>Sort</button>
                 </div>
             </div>
             <div className="container result">
             <div className="login" id="login">
+              <h1>Followers <span id="flow"> </span> </h1>
                     {githubData.map((name) => (
                         <div className="followers" id="followers" key={name.id}>
                             <a href={name.html_url} className="followersr">
@@ -130,9 +165,10 @@ class App extends Component {
             </div>
             <div className="container result resultDois">
             <div className="login loginDois" id="login">
+            <h1>Following: <span id="fwing"> </span></h1>
                     {githubData.map((name) => (
                         <div className="following" id="following" key={name.id}>
-                            <a href={name.html_url} className="followersr">
+                            <a href={name.html_url}>
                                 <p className="nomes">{name.login}</p>
                                 <img src={name.avatar_url} alt="Avatar"/>
                             </a>
@@ -147,5 +183,6 @@ class App extends Component {
       </div>
     ); 
   }
+  
 }
 export default App;

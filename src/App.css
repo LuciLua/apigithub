@@ -21,6 +21,13 @@
   align-items: flex-start;
 }
 
+.container h1{
+  margin: 20px 0 20px 0;
+  border-bottom: 1px solid rgb(0, 255, 42);
+  color: rgb(0, 255, 34);
+  padding: 10px 0 10px 0;
+}
+
 .result::-webkit-scrollbar{
   width: 2px;
   background-color: rgb(0, 255, 42);
