@@ -11,7 +11,6 @@ const api = {
 
 class App extends Component {
 
-
   constructor(){
     super();
     this.state = {
@@ -20,19 +19,8 @@ class App extends Component {
   }
 
   componentDidMount(){ // will é chamado so uma vez: antes do site ser renderizado, ele é chamado no server side.... já o did: ja foi montado. é chamado depois que o site ja carregou, quando o cliente ja recebeu algumas informações do site.
-
-    // var page = "?page=2"
-    var pageB = document.getElementById('page').value
-    axios
-    .get(
-      api.baseURL+"/users/LuciLua/followers?page=" + pageB)
-      .then((res) => {
-        console.log("Infos", res)
-        this.setState({githubData: res.data})
-      })    
     }
      
-    
     render(){
       
       const { githubData } = this.state;
@@ -40,9 +28,7 @@ class App extends Component {
       var followersTotal = []
       var followingTotal = []
       
-      function teste() {
-
-        
+      function search() {
         var pageB = document.getElementById('page').value
         
         axios
@@ -72,10 +58,7 @@ class App extends Component {
             document.querySelector('.loginDois').innerHTML += dados
 
             followingTotal.push(res.data[i].login)
-            var fwing = document.getElementById('fwing')
-            fwing.innerHTML = res.data.length
           }
-
             })       
             
           }
@@ -114,20 +97,24 @@ class App extends Component {
           }
 
             function check(){
-              for (let i = 0; i < followingTotal.length; i++){
 
-                // console.log('following', [i+1], followingTotal[i])               
+              const stranger = []
+              for(let i = 0; i < followersTotal.length; i++){
 
-                for (let o = 0; o < followersTotal.length; o++){
-  
-                  console.log('followers', [o+1], followersTotal[o])        
-                  if (followingTotal[i] === followersTotal[o]){
-                    console.log('ok')
-                  }       else {
+                for(let p = 0; p < followingTotal.length; p++){
+                  if(followingTotal[p] === followersTotal[i]){
+                    break
+                  } else {
+                    console.log(followersTotal[i], followingTotal[i])
+                    if (followersTotal[i] !== followingTotal[i]){
+                      document.getElementById('stranger').innerHTML = 'who?'
+                    }
+                    break
                   }
-  
                 }
               }
+              console.log(stranger)
+
             }
 
     return(
@@ -137,14 +124,11 @@ class App extends Component {
         </header>
         <main>
             <div className="container">
-              <div id="contador">
-                  30
-              </div>
                 <div className="form">
                     <input type="text" placeholder="page" id="page"/>
                     <input type="text" placeholder="pageC" id="pageC"/>
                     <input type="text" placeholder="seguidor" onInput={segui} />
-                    <button type="submit" onClick={teste}>Look this</button>
+                    <button type="submit" onClick={search}>Look this</button>
                     <button onClick={clear}>Clear</button>
                     <button onClick={check}>Check</button>
                     <button onClick={sort}>Sort</button>
@@ -166,6 +150,20 @@ class App extends Component {
             <div className="container result resultDois">
             <div className="login loginDois" id="login">
             <h1>Following: <span id="fwing"> </span></h1>
+                    {githubData.map((name) => (
+                        <div className="following" id="following" key={name.id}>
+                            <a href={name.html_url}>
+                                <p className="nomes">{name.login}</p>
+                                <img src={name.avatar_url} alt="Avatar"/>
+                            </a>
+                      </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="container result">
+            <div className="login" id="login">
+            <h1>Stranger: <span id="stranger"> </span></h1>
                     {githubData.map((name) => (
                         <div className="following" id="following" key={name.id}>
                             <a href={name.html_url}>

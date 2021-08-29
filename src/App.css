@@ -1,10 +1,10 @@
 .container{
   width: 400px;
-  height: 400px;
+  height: 450px;
   background-color: rgb(47, 47, 53);
 
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.349);
-  border-radius: 5px;
+  box-shadow: 0 0 12px rgba(18, 19, 29, 0.652);
+  border-radius: 20px;
 
   display: flex;
   align-items: center;
@@ -19,13 +19,17 @@
   overflow-y: scroll;
   display: flex;
   align-items: flex-start;
+
+  margin-top: 100px;
 }
 
 .container h1{
-  margin: 20px 0 20px 0;
+  position: absolute;
+
   border-bottom: 1px solid rgb(0, 255, 42);
   color: rgb(0, 255, 34);
-  padding: 10px 0 10px 0;
+
+  transform: translateY(-100px) translateX(-30px);
 }
 
 .result::-webkit-scrollbar{
