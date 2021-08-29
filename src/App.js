@@ -49,7 +49,7 @@ class App extends Component {
         var pageC = document.getElementById('pageC').value 
 
         axios
-        .get(api.baseURL+"/users/LuciLua/following?page=".concat(pageC))
+        .get(api.baseURL+"/users/LuciLua/following?page=".concat(pageC)+`/${api.client_id}&${api.client_secret}`)
         .then((res) => {
           
           for (let i = 0; i < res.data.length; i++){
