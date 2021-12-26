@@ -12,6 +12,14 @@ function App({Component, pageProps}){
         <title>Using GitHub API</title>
       </Head>
       <main>
+        <div className='mesages'>
+          <div className='content-message'>
+            <h1 id='mesageName'>Logado com sucesso</h1>
+            <p id='mesageInfo'>
+              Alguma coisa informando alguma coisa
+            </p>
+          </div>
+        </div>
         <div className='toggleTheme' onClick={toggleTheme}>
           <div/>
         </div>
