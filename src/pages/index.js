@@ -5,13 +5,10 @@ function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        <h1>
-          Formulário
-        </h1>
         <div className={styles.inputArea}>
           <input required />
           <label>
-            github user
+            Username
           </label>
         </div>
         <button>

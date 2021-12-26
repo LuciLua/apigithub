@@ -9,14 +9,17 @@
 
     .form {
         background-color: #fff;
+        box-shadow: 0 0 12px rgba(163, 161, 161, 0.378);
         border-radius: 8px;
         width: 400px;
-        height: 250px;
+        height: 150px;
 
         padding: 20px;
 
         display: flex;
         flex-direction: column;
+        justify-self: center;
+        align-items: center;
 
         h1 {
             width: 100%;
@@ -27,12 +30,10 @@
         }
 
         .inputArea {
-            padding: 10px 15px;
 
             height: 70px;
             width: 100%;
-
-
+            
             display: flex;
             flex-direction: column;
 
@@ -45,14 +46,12 @@
 
             overflow: hidden;
 
-            margin-bottom: 4px;
-
             label {
                 color: rgba(36, 36, 36, 0.398);
                 position: absolute;
 
-                bottom: 23px;
-                left: 17px;
+                bottom: 24px;
+                left: 0px;
 
                 font-size: 18px;
 
@@ -65,7 +64,7 @@
                     content: "";
                     position: absolute;
 
-                    width: 330px;
+                    width: 400px;
                     height: 2px;
                     background-color: rgba(59, 96, 189, 0);
 
@@ -94,7 +93,7 @@
                 &:active + label,
                 &:focus + label,
                 &:valid + label {
-                    bottom: 46px;
+                    bottom: 45px;
                     transition: 0.2s;
 
                     font-size: 15px;
@@ -130,7 +129,6 @@
 
             cursor: pointer;
 
-            margin: 0 auto 20px auto;
 
             &:hover {
                 background: rgb(59, 61, 226);
