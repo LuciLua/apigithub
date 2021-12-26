@@ -1,34 +1,30 @@
-import { useRouter } from "next/router"
-import { GetStaticPaths } from "next"
+import { useRouter } from "next/router";
+import { GetStaticPaths } from "next";
 
 function DynamicPage(props) {
+  const router = useRouter();
 
-    const router = useRouter()
+  const { nome } = props;
 
-    const { nome } = props
+  console.log(router);
+  // console.log(router.query.id)
 
-    console.log(router)
-    // console.log(router.query.id)
+  // if( !router.isFallback){
+  //     console.log('erro')
+  // }
 
-    // if( !router.isFallback){
-    //     console.log('erro')
-    // }
+  // const id = router.query.id
+  // mesma coisa
+  const {
+    query: { id },
+  } = router;
 
-    // const id = router.query.id
-    // mesma coisa
-    const { query: { id } } = router
-
-
-    return(
-        <>
-            <h1>
-                Hello {id}
-            </h1>
-            <h2>
-                {nome}
-            </h2>
-        </>
-    )
+  return (
+    <>
+      <h1>Hello {id}</h1>
+      <h2>{nome}</h2>
+    </>
+  );
 }
 
 // export async function getStaticProps(ctx){
@@ -40,4 +36,4 @@ function DynamicPage(props) {
 //     })
 // }
 
-export default DynamicPage
+export default DynamicPage;
