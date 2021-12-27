@@ -2,9 +2,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import withAuth from "../../utils/withAuth";
 import styles from "../user/user.module.scss";
-import Info from "../../components/Info";
+import { username } from "../";
 
-function DynamicPage() {
+function DynamicPage(props) {
   const router = useRouter();
 
   // if( !router.isFallback){
@@ -18,35 +18,62 @@ function DynamicPage() {
     query: { id },
   } = router;
 
+  const { user } = props
+
   return (
     <>
       <div className={styles.container}>
         <h1>Hello {id}, this is your private page</h1>
-        <Info />
         <Link href={"/"}>
           <a>Back to Home</a>
         </Link>
+        <span>
+          {user.login}
+        </span>
       </div>
     </>
   );
 }
 
-// impede qualquer renderização se não estiver logado
-export const getServerSideProps = async ({ req }) => {
-  const { token } = req.cookies;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+export const getStaticPaths = async (ctx) => {
 
   return {
-    props: {},
-  };
-};
+    paths: [
+    ], 
+    fallback: 'blocking'
+  }
+}
+
+export async function getStaticProps(){
+
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  const data = await response.json();
+
+  return{
+    props:{
+      user: data
+    }
+  }
+}
+
+
+
+// impede qualquer renderização se não estiver logado
+// export const getServerSideProps = async ({ req }) => {
+//   const { token } = req.cookies;
+
+//   if (!token) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
+
+//   return {
+//     props: {},
+//   };
+// };
 
 export default withAuth(DynamicPage);

@@ -41,6 +41,9 @@ function Home() {
     } else {
       loginFail();
     }
+
+    getUsername()
+
   }
 
   function signInSignOut(e) {
@@ -109,6 +112,12 @@ function Home() {
     }
   }
 
+  function getUsername(){
+    var username = document.querySelector('#username').value
+    console.log(username)
+    return username
+  }
+
   return (
     <div className={styles.container}>
       <div className={classNames(styles.log, styles.boxesInitial)}>
@@ -133,3 +142,4 @@ function Home() {
 }
 
 export default Home;
+export var username
