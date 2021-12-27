@@ -80,4 +80,4 @@ yarn format
 
 **So far, this is the preview, but you can check it out at [this updated link](https://socialmusic.vercel.app/)**
 
-<img src="./screenshot.png"/>
+<img src="./print.png"/>
