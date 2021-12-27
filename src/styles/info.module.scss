@@ -1,0 +1,51 @@
+.infoBox {
+  box-shadow: 0 0 13px #ddd;
+  border-radius: 8px;
+
+  padding: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  font-family: "Roboto";
+
+  margin: auto;
+
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .imgUser {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .nameAndLocation {
+      display: flex;
+      flex-direction: row;
+      position: relative;
+
+      margin-bottom: 20px;
+
+      div {
+        margin-left: 20px;
+        position: relative;
+
+        &::before {
+          content: "";
+          right: 30px;
+          top: 2px;
+          position: absolute;
+          width: 1px;
+          height: 16px;
+          background-color: rgb(41, 41, 41);
+        }
+      }
+    }
+  }
+}

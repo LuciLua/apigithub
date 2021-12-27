@@ -1,0 +1,32 @@
+.infoBox {
+  width: 90vw;
+  height: fit-content;
+  min-height: 500px;
+
+  box-shadow: 0 0 13px #ddd;
+  border-radius: 8px;
+
+  padding: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  font-family: "Roboto";
+
+  margin: auto;
+
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    embed {
+      overflow: hidden;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}

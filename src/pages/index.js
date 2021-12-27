@@ -121,7 +121,7 @@ function Home() {
       </div>
       <div className={classNames(styles.form, styles.boxesInitial)}>
         <div className={styles.inputArea}>
-          <input required onKeyPress={pressEnterToSend} />
+          <input required onKeyPress={pressEnterToSend} id="username" />
           <label>Username</label>
         </div>
         <button type="submit" onClick={login}>

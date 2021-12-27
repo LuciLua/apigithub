@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import withAuth from "../../utils/withAuth";
 import styles from "../user/user.module.scss";
+import Info from "../../components/Info";
 
 function DynamicPage() {
   const router = useRouter();
@@ -21,6 +22,7 @@ function DynamicPage() {
     <>
       <div className={styles.container}>
         <h1>Hello {id}, this is your private page</h1>
+        <Info />
         <Link href={"/"}>
           <a>Back to Home</a>
         </Link>
