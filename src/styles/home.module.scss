@@ -4,22 +4,63 @@
   min-height: 100vh;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .form {
+  .boxesInitial {
     background-color: #fff;
     box-shadow: 0 0 12px rgba(163, 161, 161, 0.378);
     border-radius: 8px;
     width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .log {
+    height: 50px;
+    margin-bottom: 10px;
+    flex-direction: row;
+    justify-content: space-around;
+
+    button {
+      border: none;
+      background: none;
+
+      border-radius: 5px;
+
+      width: 100px;
+      height: 30px;
+
+      font-family: "roboto";
+
+      cursor: pointer;
+
+      &:nth-child(1) {
+        background: rgb(34, 86, 197);
+        color: #fff;
+
+        &:hover {
+          background: rgb(26, 68, 158);
+        }
+      }
+      &:nth-child(2) {
+        background: transparent;
+        color: rgb(34, 86, 197);
+
+        &:hover {
+          color: rgb(0, 81, 255);
+        }
+      }
+    }
+  }
+
+  .form {
     height: 150px;
 
     padding: 20px;
-
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center;
 
     h1 {
       width: 100%;

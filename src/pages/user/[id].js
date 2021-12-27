@@ -1,13 +1,11 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { GetStaticPaths } from "next";
+import withAuth from "../../utils/withAuth";
+import styles from "../user/user.module.scss"
 
-function DynamicPage(props) {
+function DynamicPage() {
+
   const router = useRouter();
-
-  const { nome } = props;
-
-  console.log(router);
-  // console.log(router.query.id)
 
   // if( !router.isFallback){
   //     console.log('erro')
@@ -15,25 +13,42 @@ function DynamicPage(props) {
 
   // const id = router.query.id
   // mesma coisa
+
   const {
     query: { id },
   } = router;
 
   return (
     <>
-      <h1>Hello {id}</h1>
-      <h2>{nome}</h2>
+    <div className={styles.container}>
+      <h1>Hello {id}, this is your private page</h1>
+      <Link href={'/'}>
+        <a>
+          Back to Home
+        </a>
+      </Link>
+    </div>
     </>
   );
 }
 
-// export async function getStaticProps(ctx){
-//     const nome = 'luci'
-//     return({
-//         props: {
-//             nome
-//         }
-//     })
-// }
+// impede qualquer renderização se não estiver logado
+export const getServerSideProps = async ({ req }) => {
+  const { token } = req.cookies
 
-export default DynamicPage;
+  if(!token){
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
+
+
+export default withAuth(DynamicPage);
