@@ -27,7 +27,7 @@ function DynamicPage(props) {
 
   async function getGithubProfile() {
     const resp = await axios.get(`https://api.github.com/users/${user}`)
-    const data = await resp.json()
+    const data = await resp.data
     setDataUser(data)
   }
 
