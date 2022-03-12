@@ -9,18 +9,14 @@
 
 .cabecalho {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-
-  background-color: #191A1F;
-  color: #fff;
 }
 
 .cabecalho h1 {
     font-size: 1.4rem;
-
     margin-left: 70px;
-
 }
 
 .cabecalho a {
@@ -43,5 +39,4 @@
 .conteudo {
   padding: 25px;
   height: 100%;
-  background-color: rgba(119, 119, 119, 0.062);
 }
